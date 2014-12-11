@@ -24,7 +24,7 @@
 
   <div id="clipping-content">
   </div>
-  <a id="orig-file-link" href="#">View original file</a>
+  <a id="orig-file-link" target="_blank" href="#">View original file</a>
 
   <div id="comments-area">
     <div id="comments-header">
