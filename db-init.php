@@ -8,6 +8,7 @@ $sql = mysqli_connect($_DB_HOST_, $_DB_USER_, $_DB_PASS_) or die("A MySQL error 
 if ($_GET['drop'] == 'true') {
   $query = 'DROP DATABASE ' . $_DB_NAME_;
   mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
+  echo 'DB dropped<br />';
 }
 
 // Create the database and select it.
@@ -72,3 +73,7 @@ $query = "CREATE TABLE IF NOT EXISTS COMMENTS (
   PRIMARY KEY (ID)
 )";
 mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
+
+echo 'DB initialized<br />';
+$img = 'http://' . $_SERVER['HTTP_HOST'] . $_IWP_DIR_ . '/assets/images/party_hard.gif';
+echo '<img src="' . $img . '" />';
