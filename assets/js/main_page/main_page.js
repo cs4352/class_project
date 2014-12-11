@@ -276,6 +276,14 @@ function clickClipping(id) {
             }
         }
     }
+
+    // Get the link to the original file.
+    $.ajax({
+       url:  window.location.origin + JSI_IWP_DIR  + "/api/rest/file/get_file_by_file_id.php?fid=" + contents.ORIGFILE
+    }).done(function(response) {
+        var responseObject = JSON.parse(response);
+        $('#orig-file-link').attr('href', window.location.origin + JSI_IWP_DIR + '/uploads/' + responseObject.NAME);
+    });
 }
 
 /**
