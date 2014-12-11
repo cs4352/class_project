@@ -3,6 +3,7 @@ $(document).ready(function() {
     fileUploadFormHandler();
     addCommentSubmitHandler();
     addNotebookSubmitHandler();
+    searchSubmitHandler();
 })
 
 var origSelectedShareRecipients = [];
@@ -375,6 +376,59 @@ function addNotebookSubmitHandler() {
 
             $('#notebook-name').val('');
         });
+    });
+}
+
+function searchSubmitHandler() {
+    $('#sidebar-search-form').submit(function(event) {
+        event.preventDefault();
+        performSearch();
+    });
+}
+
+function sidebarSearch() {
+    var searchbox = $('.sidebar-search-input');
+
+    if(searchbox.val() == '') {
+        $('.sidebar-list-link').remove();
+        loadClippings();
+    } else {
+        performSearch();
+    }
+}
+
+function performSearch() {
+    // Remove current notes.
+    $('.sidebar-list-link').remove();
+
+    // Get the search term.
+    var searchTerm = $('#sidebar-search-input').val();
+
+    $.ajax({
+        url: window.location.origin + JSI_IWP_DIR  + "/api/rest/clipping/get_clipping_search.php?uid=" + JSIuid + "&term=" + searchTerm
+    }).done(function(response){
+        var responseObject = JSON.parse(response);
+        var numResponses = 0;
+        var promises = [];
+        for (var i in responseObject) {
+            numResponses ++;
+            var prependMarkup = function(data, index) {
+                return $.ajax({
+                    url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-clipping_sidebar_row.php?id=' + data[index].ID + '&uid=' + JSIuid + '&name=' + data[index].NAME + '&subtitle=' + data[index].SUBTITLE
+                }).done(function(markup) {
+                    $('#sidebar-list').append(markup);
+                });
+            };
+            var promise = prependMarkup(responseObject, i);
+            promises.push(promise);
+        }
+        // If clippings were loaded...
+        if (promises.length > 0) {
+            clippingsPageLoad();
+            $.when.apply($, promises).done(function() {
+                clickClipping('clipping-' + responseObject[numResponses - 1].ID);
+            });
+        }
     });
 }
 

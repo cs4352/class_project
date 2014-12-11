@@ -177,3 +177,21 @@ function getPreviouslySharedUsers($cid) {
   }
   return NULL;
 }
+
+function clippingGetClippingSearch($uid, $term) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  $sql = sqlSetup();
+  $query = <<<SQL
+SELECT * FROM CLIPPINGS
+WHERE UID=$uid
+AND ((NAME LIKE "%$term%") OR (SUBTITLE LIKE "%$term%") OR (CONTENT LIKE "%$term%"))
+SQL;
+  $result = mysqli_query($sql, $query);
+
+  $clippings = array();
+  while ($obj = mysqli_fetch_object($result)) {
+    $clippings[] = $obj;
+  }
+  return $clippings;
+}
