@@ -1,5 +1,6 @@
 <?php
 require('config.php');
+require(dirname(__FILE__) . '/api/notebook.php');
 
 // Start the session.
 session_start();
@@ -97,6 +98,10 @@ elseif (isset($_POST['create'])) {
     $_SESSION['current_user'] = $row[0];
     $_SESSION['fname'] = $fname;
     $_SESSION['lname'] = $lname;
+
+    // Create a default notebook for the user.
+    notebookCreateNotebook("Default", $row[0]);
+
   } else {
     $error = 'Sorry but that email address has already been used.';
   }

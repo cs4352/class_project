@@ -25,11 +25,14 @@ SQL;
 
   mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
 
-  // Return the newly created user's ID.
+  // Get the newly created user's ID.
   $query = "SELECT LAST_INSERT_ID()";
   $result = mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
   $row = mysqli_fetch_row($result);
   $id = $row[0];
+
+  // Create the user's default notebook.
+  notebookCreateNotebook("Default", $row[0]);
 
   return $id;
 }

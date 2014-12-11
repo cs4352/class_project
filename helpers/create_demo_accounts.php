@@ -5,6 +5,7 @@ require_once(dirname(__FILE__) . '/../api/file.php');
 require_once(dirname(__FILE__) . '/../api/shared_clipping.php');
 require_once(dirname(__FILE__) . '/../api/user.php');
 require_once(dirname(__FILE__) . '/../api/comment.php');
+require_once(dirname(__FILE__) . '/../api/notebook.php');
 
 // Create the users data.
 // Demo account credentials.
@@ -59,7 +60,11 @@ foreach($demo_users as &$user) {
   echo 'Account created for ' . $user->fname . ' ' . $user->lname . ' with uid ' . $uid . '.<br />';
 }
 
-// TODO: Give "demo" 2 notebooks.
+// Give "demo" 2 notebooks.
+$demo_user_notebooks = [];
+
+$demo_user_notebooks[] = notebookCreateNotebook('Biology', $demo_users['demo']->id);
+$demo_user_notebooks[] = notebookCreateNotebook('Computer Science', $demo_users['demo']->id);
 
 // Give "demo" some clippings.
 $demo_user_clippings = [];
@@ -67,6 +72,7 @@ $demo_user_clippings = [];
 $file = storeFile('demo_upload_biology.txt', 'txt', $demo_users['demo']->id);
 $clipping = saveClipping(
   $demo_users['demo']->id,
+  $demo_user_notebooks[0],
   $file,
   'Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, and taxonomy.',
   'Define: Biology',
@@ -77,6 +83,7 @@ echo 'Clipping "Define: Biology" with cid ' . $clipping . ' created from file "d
 $file = storeFile('demo_upload_php.txt', 'txt', $demo_users['demo']->id);
 $clipping = saveClipping(
   $demo_users['demo']->id,
+  $demo_user_notebooks[1],
   $file,
   'PHP is a server-side scripting language designed for web development but also used as a general-purpose programming language.',
   'What is PHP?',
@@ -87,6 +94,7 @@ echo 'Clipping "What is PHP?" with cid ' . $clipping . ' created from file "demo
 $file = storeFile('demo_upload_nodejs.txt', 'txt', $demo_users['demo']->id);
 $clipping = saveClipping(
   $demo_users['demo']->id,
+  $demo_user_notebooks[1],
   $file,
   'Node.js is an open source, cross-platform runtime environment for server-side and networking applications. Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows, Linux and FreeBSD.
 
@@ -122,7 +130,7 @@ foreach ($demo_user_clippings as $cid) {
     if ($share_toggle) {
       $uid = $user->id;
       $clipping = getClippingById($cid);
-      $newCid = saveClipping($uid, $clipping->ORIGFILE, $clipping->CONTENT, $clipping->NAME, $clipping->SUBTITLE);
+      $newCid = saveClipping($uid, 0, $clipping->ORIGFILE, $clipping->CONTENT, $clipping->NAME, $clipping->SUBTITLE);
       setUserNotification($uid, 'A new clipping has been shared with you!');
       shareClipping($newCid, $cid, $uid);
       createComment($newCid, $uid, $comments[rand(0, sizeof($comments) - 1)]);
