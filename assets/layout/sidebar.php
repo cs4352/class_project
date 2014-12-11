@@ -17,7 +17,7 @@
   </div>
   <div id="sidebar-search" class="revealable">
     <form id="sidebar-search-form" method="get" action="">
-      <input type="text" class="sidebar-search-input" name="q" size="21" maxlength="120" placeholder="Search...">
+      <input type="text" class="sidebar-search-input" id="sidebar-search-input" name="q" size="21" maxlength="120" onchange="sidebarSearch()" onkeyup="sidebarSearch()" placeholder="Search...">
       <button type="submit">Search</button>
     </form>
   </div>
@@ -30,10 +30,6 @@
 </div>
 
 <script>
-
-  document.querySelector('#sidebar-search').onclick = function(){
-    swal("Feature not implemented", "We'll get that working right away!")
-  };
 
   document.querySelector('#sidebar-add-button').onclick = function(){
     document.getElementById('sidebar-add-buttons').classList.toggle('animation-open');
