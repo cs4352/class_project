@@ -58,7 +58,7 @@ function getClippingsByUserId($userId) {
  * @return int
  *  The ID of the file that was created.
  */
-function saveClipping($userId, $notebookId, $file, $content, $name, $subtitle) {
+function saveClipping($userId, $notebookId, $file, $content, $name, $subtitle, $color) {
   $time = time();
   require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
   require_once(dirname(__FILE__) . '/notebook.php');
@@ -70,9 +70,9 @@ function saveClipping($userId, $notebookId, $file, $content, $name, $subtitle) {
   }
 
   $sql = sqlSetup();
-  $query = "INSERT INTO CLIPPINGS (CREATED, ACCESSED, UID, NOTEBOOK_ID, ORIGFILE, CONTENT, NAME, SUBTITLE)
+  $query = "INSERT INTO CLIPPINGS (CREATED, ACCESSED, UID, NOTEBOOK_ID, ORIGFILE, CONTENT, NAME, SUBTITLE, COLOR)
             VALUES
-            ($time, $time, $userId, $notebookId, $file, \"$content\", \"$name\", \"$subtitle\")";
+            ($time, $time, $userId, $notebookId, $file, \"$content\", \"$name\", \"$subtitle\", \"$color\")";
   mysqli_query($sql, $query);
   $query = "SELECT LAST_INSERT_ID()";
   $result = mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));

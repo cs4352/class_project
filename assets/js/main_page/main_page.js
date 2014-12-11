@@ -68,7 +68,7 @@ function loadClippings() {
                 numResponses ++;
                 var prependMarkup = function(data, index) {
                     return $.ajax({
-                        url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-clipping_sidebar_row.php?id=' + data[index].ID + '&uid=' + JSIuid + '&name=' + data[index].NAME + '&subtitle=' + data[index].SUBTITLE
+                        url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-clipping_sidebar_row.php?id=' + data[index].ID + '&uid=' + JSIuid + '&name=' + data[index].NAME + '&subtitle=' + data[index].SUBTITLE + '&color=' + data[index].COLOR
                     }).done(function(markup) {
                         $('#notebook-' + data[index].NOTEBOOK_ID).append(markup);
                     });
@@ -421,7 +421,7 @@ function performSearch() {
             numResponses ++;
             var prependMarkup = function(data, index) {
                 return $.ajax({
-                    url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-clipping_sidebar_row.php?id=' + data[index].ID + '&uid=' + JSIuid + '&name=' + data[index].NAME + '&subtitle=' + data[index].SUBTITLE
+                    url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-clipping_sidebar_row.php?id=' + data[index].ID + '&uid=' + JSIuid + '&name=' + data[index].NAME + '&subtitle=' + data[index].SUBTITLE + '&color=' + data[index].COLOR
                 }).done(function(markup) {
                     $('#sidebar-list').append(markup);
                 });
@@ -649,12 +649,13 @@ function fileUploadFormHandler() {
         var content = document.getElementById('clipping-text').value;
         var file = document.getElementById('fid').value;
         var notebookId = document.getElementById('clipping-notebook').value;
+        var color = document.getElementById('clipping-color').value.slice(1);
 
         // Set up the request to get the contents of the file.
         var xhr = new XMLHttpRequest();
 
         // Open the connection.
-        xhr.open('GET', window.location.origin + JSI_IWP_DIR  + "/api/rest/clipping.php?userId=" + JSIuid + "&file=" + file + "&content=" + encodeURIComponent(content) + "&name=" + name + "&subtitle=" + subtitle + "&notebook_id=" + notebookId, false);
+        xhr.open('GET', window.location.origin + JSI_IWP_DIR  + "/api/rest/clipping.php?userId=" + JSIuid + "&file=" + file + "&content=" + encodeURIComponent(content) + "&name=" + name + "&subtitle=" + subtitle + "&notebook_id=" + notebookId + "&color=" + color, false);
         xhr.send();
         hideClippingOverlay();
 

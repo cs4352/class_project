@@ -25,9 +25,13 @@
             </div>
             <input type="text" id="clipping-name" name="clipping-name" placeholder="Clipping Name" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required /><br />
             <textarea type="text" id="clipping-subtitle" name="clipping-subtitle" placeholder="Clipping Description" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required></textarea>
+            <label id="clipping-notebook-label" for="clipping-notebook">Select a notebook to save your clipping in</label>
             <select id="clipping-notebook">
               <!-- Options populated in js -->
             </select><br />
+            <br />
+            <label id="clipping-color-label" for="clipping-color">Select a color for your clipping</label><br />
+            <input id="clipping-color" type="color" value="#9AC5FF" /><br />
             <button type="submit" id="save-clipping">Save Clipping</button>
           </form>
         </div>

@@ -51,6 +51,7 @@ $query = 'CREATE TABLE IF NOT EXISTS ' . $_DB_CLIPPINGS_TABLE_ . '(
   CONTENT longtext NOT NULL,
   NAME varchar(255),
   SUBTITLE varchar(255),
+  COLOR varchar(255),
   PRIMARY KEY (ID)
   )';
 mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
