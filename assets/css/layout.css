@@ -409,6 +409,16 @@ textarea {
     display: none; /* Hidden unless clippings loaded */
 }
 
+#orig-file-link {
+    display: none;
+    color: #353535;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#orig-file-link:hover {
+    text-decoration: underline;
+ }
+
 /* #Comment Area Styles
 ================================================== */
 

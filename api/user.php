@@ -32,7 +32,7 @@ SQL;
   $id = $row[0];
 
   // Create the user's default notebook.
-  notebookCreateNotebook("Default", $row[0]);
+  notebookCreateNotebook("Default Notebook", $row[0]);
 
   return $id;
 }

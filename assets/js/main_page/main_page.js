@@ -44,7 +44,7 @@ function loadClippings() {
             $('#sidebar-list').append(markup);
 
             // Populate the notebooks list for the clipping creation form.
-            if (responseObject[i].NAME == 'Default') {
+            if (responseObject[i].NAME == 'Default Notebook') {
                 $('#clipping-notebook')
                     .append($("<option selected></option>")
                         .attr("value", responseObject[i].ID)
@@ -96,6 +96,7 @@ function clippingsPageLoad() {
     $('#content-header').show();
     $('#clipping-content').show();
     $('#comments-area').show();
+    $('#orig-file-link').show();
 }
 
 function noClippingsPageLoad() {
@@ -103,6 +104,9 @@ function noClippingsPageLoad() {
     $('#clipping-content').hide();
     $('#comments-area').hide();
     $('#new-user-area').show();
+    $('#orig-file-link').hide();
+
+    $('.sidebar-list-cell-notebook').hide();
 }
 
 

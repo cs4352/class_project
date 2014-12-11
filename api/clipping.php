@@ -66,7 +66,7 @@ function saveClipping($userId, $notebookId, $file, $content, $name, $subtitle, $
   // If the notebookId is 0, that means we need to save it to the user's default
   // notebook.
   if ($notebookId == 0) {
-    $notebookId = notebookGetUserNotebookByName($userId, 'Default')->ID;
+    $notebookId = notebookGetUserNotebookByName($userId, 'Default Notebook')->ID;
   }
 
   $sql = sqlSetup();

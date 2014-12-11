@@ -23,8 +23,8 @@
               <textarea id="uploaded-file-text" name="uploaded-file-text" ondragstart="drag(event)" draggable="true" resizable spellcheck="false"></textarea>
               <textarea id="clipping-text" name="clipping-text" ondrop="drop(event)" ondragover="allowDrop(event)" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required resizeable title="This is an error message" placeholder="Drag selected text here"></textarea><br />
             </div>
-            <input type="text" id="clipping-name" name="clipping-name" placeholder="Clipping Name" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required /><br />
-            <textarea type="text" id="clipping-subtitle" name="clipping-subtitle" placeholder="Clipping Description" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required></textarea>
+            <input type="text" id="clipping-name" name="clipping-name" placeholder="Clipping Name" maxlength=25" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required /><br />
+            <textarea type="text" id="clipping-subtitle" name="clipping-subtitle" placeholder="Clipping Description" maxlength="45" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required></textarea>
             <label id="clipping-notebook-label" for="clipping-notebook">Select a notebook to save your clipping in</label>
             <select id="clipping-notebook">
               <!-- Options populated in js -->
