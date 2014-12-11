@@ -90,8 +90,18 @@ require_once('config.php');
             <div class="panel-body">
               <input type="email" name="email" class="form-control" id="input_email" placeholder="Enter your email" required><br />
               <input type="password" name="password" class="form-control" id="input_password" placeholder="Enter your password" required><br />
-              <button type="submit" class="btn btn-default col-sm-8 col-sm-offset-2" name="sign_in">Sign in</button>
+              <button type="submit" class="btn btn-default col-sm-8 col-sm-offset-2" id="sign-in-submit" name="sign_in">Sign in</button>
               <button type="button" class="btn btn-default col-sm-8 col-sm-offset-2" id="create_account_open_modal_button" data-toggle="modal" data-target="#create_account_modal">Create new account</button>
+              <br />
+              <br />
+              <br />
+              <br />
+              <a href="#" onClick="loginUser('rm@example.com', '123testing');">Login as demo user</a><br />
+              <a href="#" onClick="loginUser('sb@example.com', '123testing');">Login as Stephanie Brisendine</a><br />
+              <a href="#" onClick="loginUser('jd@example.com', '123testing');">Login as Jonathan Darling</a><br />
+              <a href="#" onClick="loginUser('od@example.com', '123testing');">Login as Omar Darwish</a><br />
+              <a href="#" onClick="loginUser('je@example.com', '123testing');">Login as Justin Ehlert</a><br />
+              <a href="#" onClick="loginUser('tl@example.com', '123testing');">Login as Twinkle Lam</a>
             </div>
           </div>
         </div>

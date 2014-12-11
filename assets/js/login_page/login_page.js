@@ -33,3 +33,9 @@ $(document).ready(function() {
         return true;
     });
 });
+
+loginUser = function(email, pass) {
+    $('#input_email').val(email);
+    $('#input_password').val(pass);
+    $('#sign-in-submit').click();
+};
