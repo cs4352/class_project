@@ -44,10 +44,17 @@ function loadClippings() {
             $('#sidebar-list').append(markup);
 
             // Populate the notebooks list for the clipping creation form.
-            $('#clipping-notebook')
-                .append($("<option></option>")
-                    .attr("value", responseObject[i].ID)
-                    .text(responseObject[i].NAME));
+            if (responseObject[i].NAME == 'Default') {
+                $('#clipping-notebook')
+                    .append($("<option selected></option>")
+                        .attr("value", responseObject[i].ID)
+                        .text(responseObject[i].NAME));
+            } else {
+                $('#clipping-notebook')
+                    .append($("<option></option>")
+                        .attr("value", responseObject[i].ID)
+                        .text(responseObject[i].NAME));
+            }
         }
 
 
