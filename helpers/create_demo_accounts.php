@@ -76,7 +76,8 @@ $clipping = saveClipping(
   $file,
   'Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, and taxonomy.',
   'Define: Biology',
-  'The definition of Biology');
+  'The definition of Biology',
+  'FF530D');
 $demo_user_clippings[] = $clipping;
 echo 'Clipping "Define: Biology" with cid ' . $clipping . ' created from file "demo_upload_biology.txt" with fid ' . $file . '.<br />';
 
@@ -87,7 +88,8 @@ $clipping = saveClipping(
   $file,
   'PHP is a server-side scripting language designed for web development but also used as a general-purpose programming language.',
   'What is PHP?',
-  'Overview of PHP');
+  'Overview of PHP',
+  'FF0DFF');
 $demo_user_clippings[] = $clipping;
 echo 'Clipping "What is PHP?" with cid ' . $clipping . ' created from file "demo_upload_php.txt" with fid ' . $file . '.<br />';
 
@@ -102,7 +104,8 @@ Node.js provides an event-driven architecture and a non-blocking I/O API that op
 
 Node.js uses the Google V8 JavaScript engine to execute code, and a large percentage of the basic modules are written in JavaScript. Node.js contains a built-in library to allow applications to act as a Web server without software such as Apache HTTP Server or IIS.',
   'What is NodeJS?',
-  'Overview of NodeJS');
+  'Overview of NodeJS',
+  '17FF03');
 $demo_user_clippings[] = $clipping;
 echo 'Clipping "What is NodeJS?" with cid ' . $clipping . ' created from file "demo_upload_nodejs.txt" with fid ' . $file . '.<br />';
 
@@ -130,7 +133,7 @@ foreach ($demo_user_clippings as $cid) {
     if ($share_toggle) {
       $uid = $user->id;
       $clipping = getClippingById($cid);
-      $newCid = saveClipping($uid, 0, $clipping->ORIGFILE, $clipping->CONTENT, $clipping->NAME, $clipping->SUBTITLE);
+      $newCid = saveClipping($uid, 0, $clipping->ORIGFILE, $clipping->CONTENT, $clipping->NAME, $clipping->SUBTITLE, $clipping->COLOR);
       setUserNotification($uid, 'A new clipping has been shared with you!');
       shareClipping($newCid, $cid, $uid);
       createComment($newCid, $uid, $comments[rand(0, sizeof($comments) - 1)]);

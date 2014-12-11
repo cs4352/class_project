@@ -704,9 +704,23 @@ div #overlay-content {
     margin-top: 20px;
 }
 
+#clipping-notebook-label {
+    font-size: 15px;
+    font-style: italic;
+}
+
 #clipping-notebook {
     width: 80%;
     font-size: 15px;
+}
+
+#clipping-color-label {
+    font-size: 15px;
+    font-style: italic;
+}
+
+#clipping-color {
+    width: 80%;
 }
 
 
