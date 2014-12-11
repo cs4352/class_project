@@ -1,6 +1,40 @@
 <?php
 
 /**
+ * Creates an account for the specified user.
+ *
+ * @param string $email
+ *  The user's email address.
+ * @param string $password
+ *  The user's password.
+ * @param string $fname
+ *  The user's first name.
+ * @param string $lname
+ *  The user's last name.
+ */
+function userCreateUser($email, $password, $fname, $lname) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  $sql = sqlSetup();
+  $query = <<<SQL
+INSERT INTO USERS
+(EMAIL, PASSWORD, FNAME, LNAME)
+VALUES
+("$email", "$password", "$fname", "$lname")
+SQL;
+
+  mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
+
+  // Return the newly created user's ID.
+  $query = "SELECT LAST_INSERT_ID()";
+  $result = mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
+  $row = mysqli_fetch_row($result);
+  $id = $row[0];
+
+  return $id;
+}
+
+/**
  * Fetches a user's info using their id.
  *
  * @param int $id
