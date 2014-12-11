@@ -81,7 +81,8 @@ CREATE TABLE IF NOT EXISTS NOTEBOOKS (
   ID int(11) AUTO_INCREMENT,
   NAME varchar(255) NOT NULL,
   UID int(11) NOT NULL,
-  PRIMARY KEY (ID)
+  PRIMARY KEY (ID),
+  UNIQUE KEY (NAME, UID)
 )
 SQL;
 mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));

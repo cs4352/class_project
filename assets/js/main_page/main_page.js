@@ -1,14 +1,19 @@
 $(document).ready(function() {
-    displayNotifications();
-    loadClippings();
+    loadPage();
     fileUploadFormHandler();
     addCommentSubmitHandler();
+    addNotebookSubmitHandler();
 })
 
 var origSelectedShareRecipients = [];
 var origUnselectedShareRecipients = [];
 var selectedShareRecipients = [];
 var unselectedShareRecipients = [];
+
+function loadPage() {
+    displayNotifications();
+    loadClippings();
+}
 
 function displayNotifications() {
     $.ajax({
@@ -23,34 +28,58 @@ function displayNotifications() {
 
 // Loads clipping links into the sidebar.
 function loadClippings() {
+
+    // Remove previous options for the notebook form.
+    $('#clipping-notebook')
+        .find('option')
+        .remove();
+
     $.ajax({
-        url: window.location.origin + JSI_IWP_DIR  + '/api/rest/clipping.php?uid=' + JSIuid
+        url: window.location.origin + JSI_IWP_DIR + '/api/rest/notebook/get_user_notebooks.php?uid=' + JSIuid
     }).done(function(response) {
         var responseObject = JSON.parse(response);
-        var numResponses = 0;
-        var promises = [];
         for (var i in responseObject) {
-            numResponses ++;
-            var promise = $.ajax({
-                url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-clipping_sidebar_row.php?id=' + responseObject[i].ID + '&uid=' + JSIuid + '&name=' + responseObject[i].NAME + '&subtitle=' + responseObject[i].SUBTITLE
-            }).done(function(markup) {
-                $('#sidebar-list').prepend(markup);
+            var markup = JSInotebookRowTemplate.replace('%id', 'notebook-' + responseObject[i].ID).replace('%name', responseObject[i].NAME);
+            $('#sidebar-list').append(markup);
 
-                // Click the last clipping.
-                // TODO: Find a better way to do this.
-            });
-            promises.push(promise);
+            // Populate the notebooks list for the clipping creation form.
+            $('#clipping-notebook')
+                .append($("<option></option>")
+                    .attr("value", responseObject[i].ID)
+                    .text(responseObject[i].NAME));
         }
-        // If clippings were loaded...
-        if (promises.length > 0) {
-            clippingsPageLoad();
-            $.when.apply($, promises).done(function() {
-                clickClipping('clipping-' + responseObject[numResponses - 1].ID);
-            });
-        }
-        else {
-            noClippingsPageLoad();
-        }
+
+
+        $.ajax({
+            url: window.location.origin + JSI_IWP_DIR  + '/api/rest/clipping.php?uid=' + JSIuid
+        }).done(function(response) {
+            var responseObject = JSON.parse(response);
+            var numResponses = 0;
+            var promises = [];
+            for (var i in responseObject) {
+                numResponses ++;
+                var prependMarkup = function(data, index) {
+                    return $.ajax({
+                        url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-clipping_sidebar_row.php?id=' + data[index].ID + '&uid=' + JSIuid + '&name=' + data[index].NAME + '&subtitle=' + data[index].SUBTITLE
+                    }).done(function(markup) {
+                        $('#notebook-' + data[index].NOTEBOOK_ID).append(markup);
+                    });
+                };
+                var promise = prependMarkup(responseObject, i);
+                promises.push(promise);
+            }
+            // If clippings were loaded...
+            if (promises.length > 0) {
+                clippingsPageLoad();
+                $.when.apply($, promises).done(function() {
+                    clickClipping('clipping-' + responseObject[numResponses - 1].ID);
+                });
+            }
+            else {
+                noClippingsPageLoad();
+            }
+        });
+
     });
 }
 
@@ -121,13 +150,10 @@ function hideClippingOverlay() {
 
 // Add Notebook Modal controls. ///////////////////////////////////////////////////
 function showNotebookOverlay() {
+    el = document.getElementById("add-notebook-overlay");
+    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 
-    swal("Feature not implemented", "We'll get that working right away!");
-    //TODO: Implement add notebook functionality.
-    //el = document.getElementById("add-notebook-overlay");
-    //el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-    //
-    //showOverlayBackground();
+    showOverlayBackground();
 }
 
 function hideNotebookOverlay() {
@@ -318,6 +344,32 @@ function addCommentSubmitHandler() {
     });
 }
 
+function addNotebookSubmitHandler() {
+    $('#notebook-form').submit(function(event) {
+        event.preventDefault();
+
+        // Get the notebook's name.
+        var name = $('#notebook-name').val();
+
+        // Create the notebook.
+        $.ajax({
+            url: window.location.origin + JSI_IWP_DIR  + "/api/rest/notebook/create_notebook.php?name=" + name + "&uid=" + JSIuid
+        }).done(function(response) {
+            hideNotebookOverlay();
+
+            var paras = document.getElementsByClassName('sidebar-list-link');
+
+            while(paras[0]) {
+                paras[0].parentNode.removeChild(paras[0]);
+            }
+
+            loadClippings();
+
+            $('#notebook-name').val('');
+        });
+    });
+}
+
 function clickUser(uid) {
     var $clickedRow = $('#' + uid);
     var uid = uid.substring(uid.indexOf('-') + 1);
@@ -436,6 +488,18 @@ function addCommentIsReady() {
     }
 }
 
+function addNotebookIsReady() {
+    var notebookName = document.getElementById('notebook-name');
+
+    if(notebookName.value == '')
+    {
+        document.getElementById('save-notebook').style.backgroundColor = '#6B6B6B';
+    } else
+    {
+        document.getElementById('save-notebook').style.backgroundColor = '#EF4D68';
+    }
+}
+
 function fileUploadFormHandler() {
     // Handle file uploads.
     var fileUploadForm = document.getElementById('file-form');
@@ -515,12 +579,13 @@ function fileUploadFormHandler() {
         var subtitle = document.getElementById('clipping-subtitle').value;
         var content = document.getElementById('clipping-text').value;
         var file = document.getElementById('fid').value;
+        var notebookId = document.getElementById('clipping-notebook').value;
 
         // Set up the request to get the contents of the file.
         var xhr = new XMLHttpRequest();
 
         // Open the connection.
-        xhr.open('GET', window.location.origin + JSI_IWP_DIR  + "/api/rest/clipping.php?userId=" + JSIuid + "&file=" + file + "&content=" + encodeURIComponent(content) + "&name=" + name + "&subtitle=" + subtitle, false);
+        xhr.open('GET', window.location.origin + JSI_IWP_DIR  + "/api/rest/clipping.php?userId=" + JSIuid + "&file=" + file + "&content=" + encodeURIComponent(content) + "&name=" + name + "&subtitle=" + subtitle + "&notebook_id=" + notebookId, false);
         xhr.send();
         hideClippingOverlay();
 

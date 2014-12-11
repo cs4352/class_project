@@ -1,6 +1,5 @@
 <?php
 
-
 function notebookCreateNotebook($name, $uid) {
   require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
 
@@ -21,4 +20,38 @@ SQL;
   $id = $row[0];
 
   return $id;
+}
+
+function notebookGetUserNotebooks($uid) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  $sql = sqlSetup();
+
+  $query = <<<SQL
+SELECT * FROM NOTEBOOKS
+WHERE UID=$uid;
+SQL;
+  $result = mysqli_query($sql, $query);
+
+  $notebooks = array();
+  while ($obj = mysqli_fetch_object($result)) {
+    $notebooks[] = $obj;
+  }
+
+  return $notebooks;
+}
+
+function notebookGetUserNotebookByName($uid, $name) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  $sql = sqlSetup();
+
+  $query = <<<SQL
+SELECT * FROM NOTEBOOKS
+WHERE UID=$uid AND NAME="$name";
+SQL;
+  $result = mysqli_query($sql, $query);
+  $notebook = mysqli_fetch_object($result);
+
+  return $notebook;
 }

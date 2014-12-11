@@ -93,7 +93,7 @@ textarea {
 ================================================== */
 
 #sidebar {
-    height: 500px;
+    height: 800px;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -237,7 +237,7 @@ textarea {
 
 #sidebar-list {
     width: 100%;
-    height: 400px;
+    height: 800px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -817,6 +817,23 @@ div #overlay-content {
     color: #fff;
     text-transform: uppercase;
     background: #EF4D68;
+    margin-top: 20px;
+}
+
+/* #Notebook Overlay Styles
+================================================== */
+#notebook-form button {
+    position: relative;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    height: 35px;
+    font-size: 16px;
+    font-weight: 400;
+    width: 140px;
+    color: #fff;
+    text-transform: uppercase;
+    background: #6B6B6B;
     margin-top: 20px;
 }
 
