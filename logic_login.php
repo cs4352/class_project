@@ -100,7 +100,7 @@ elseif (isset($_POST['create'])) {
     $_SESSION['lname'] = $lname;
 
     // Create a default notebook for the user.
-    notebookCreateNotebook("Default", $row[0]);
+    notebookCreateNotebook("Default Notebook", $row[0]);
 
   } else {
     $error = 'Sorry but that email address has already been used.';

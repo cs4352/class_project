@@ -96,7 +96,7 @@ require_once('config.php');
               <br />
               <br />
               <br />
-              <a href="#" onClick="loginUser('rm@example.com', '123testing');">Login as demo user</a><br />
+              <a href="#" onClick="loginUser('rm@example.com', '123testing');">Login as Demo user</a><br />
               <a href="#" onClick="loginUser('sb@example.com', '123testing');">Login as Stephanie Brisendine</a><br />
               <a href="#" onClick="loginUser('jd@example.com', '123testing');">Login as Jonathan Darling</a><br />
               <a href="#" onClick="loginUser('od@example.com', '123testing');">Login as Omar Darwish</a><br />
