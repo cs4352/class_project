@@ -27,7 +27,7 @@
             <textarea type="text" id="clipping-subtitle" name="clipping-subtitle" placeholder="Clipping Description" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required></textarea>
             <select id="clipping-notebook">
               <!-- Options populated in js -->
-            </select>
+            </select><br />
             <button type="submit" id="save-clipping">Save Clipping</button>
           </form>
         </div>

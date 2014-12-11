@@ -704,6 +704,12 @@ div #overlay-content {
     margin-top: 20px;
 }
 
+#clipping-notebook {
+    width: 80%;
+    font-size: 15px;
+}
+
+
 /* #Share Modal User List Styles
 ================================================== */
 
