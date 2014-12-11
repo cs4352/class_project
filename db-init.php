@@ -46,6 +46,7 @@ $query = 'CREATE TABLE IF NOT EXISTS ' . $_DB_CLIPPINGS_TABLE_ . '(
   CREATED int(11) NOT NULL,
   ACCESSED int(11) NOT NULL,
   UID int(11) NOT NULL,
+  NOTEBOOK_ID int(11) NOT NULL,
   ORIGFILE int(11) NOT NULL,
   CONTENT longtext NOT NULL,
   NAME varchar(255),
@@ -72,6 +73,17 @@ $query = "CREATE TABLE IF NOT EXISTS COMMENTS (
   CONTENT longtext,
   PRIMARY KEY (ID)
 )";
+mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
+
+// Create the notebooks table.
+$query = <<<SQL
+CREATE TABLE IF NOT EXISTS NOTEBOOKS (
+  ID int(11) AUTO_INCREMENT,
+  NAME varchar(255) NOT NULL,
+  UID int(11) NOT NULL,
+  PRIMARY KEY (ID)
+)
+SQL;
 mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
 
 echo 'DB initialized<br />';
