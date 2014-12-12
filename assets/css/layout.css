@@ -423,6 +423,7 @@ textarea {
     font-size: 14px;
     padding: 10px;
     display: none; /* Hidden unless clippings loaded */
+    overflow: scroll;
 }
 
 #orig-file-link {
