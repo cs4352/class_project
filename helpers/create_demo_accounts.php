@@ -9,7 +9,7 @@ require_once(dirname(__FILE__) . '/../api/notebook.php');
 
 // Create the users data.
 // Demo account credentials.
-$demo_users = [];
+$demo_users = array();
 
 // Professor McMahan (demo user) credentials.
 $demo_users['demo'] = new stdClass;
@@ -61,13 +61,13 @@ foreach($demo_users as &$user) {
 }
 
 // Give "demo" 2 notebooks.
-$demo_user_notebooks = [];
+$demo_user_notebooks = array();
 
 $demo_user_notebooks[] = notebookCreateNotebook('Biology', $demo_users['demo']->id);
 $demo_user_notebooks[] = notebookCreateNotebook('Computer Science', $demo_users['demo']->id);
 
 // Give "demo" some clippings.
-$demo_user_clippings = [];
+$demo_user_clippings = array();git 
 
 $file = storeFile('demo_upload_biology.txt', 'txt', $demo_users['demo']->id);
 $clipping = saveClipping(
