@@ -11,14 +11,8 @@
 		<div id="clipping-title">
 			
 		</div>
-    <div id="info-button">
-      info
-    </div>
 		<div id="share-button" onclick="showShareOverlay()">
 			Share
-		</div>
-		<div id="organize-button">
-			Organize
 		</div>
 	</div>
 
@@ -50,16 +44,3 @@
     </video>
   </div>
 </div>
-
-<script>
-
-document.querySelector('#info-button').onclick = function(){
-	swal("Feature not implemented", "We'll get that working right away!")
-};
-
-document.querySelector('#organize-button').onclick = function(){
-	swal("Feature not implemented", "We'll get that working right away!")
-};
-
-</script>
-

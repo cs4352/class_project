@@ -10,7 +10,7 @@
               <input type="file" id="file-select" name="file" accept="text/plain" required onchange="uploadIsReady()"/>
             </div>
             <div class="row" style="margin-top: 20px;">
-              At this time you may only upload .txt files
+              At this time you may only upload <strong>.txt</strong> files
             </div>
             <div class="row">
               <button type="submit" id="upload-button">Upload</button>

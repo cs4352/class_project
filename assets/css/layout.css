@@ -314,8 +314,16 @@ textarea {
     position: relative;
     top: 5px;
     right: 5px;
-    color: black;
+    color: #6B6B6B;
     float: right;
+    display: none;
+}
+
+.comment-row:hover > .clipping-delete {
+    display: block;
+}
+.sidebar-list-cell:hover > .clipping-delete {
+    display: block;
 }
 
 .shared > .clipping-shared-icon {
@@ -873,6 +881,15 @@ div #overlay-content {
     text-transform: uppercase;
     background: #6B6B6B;
     margin-top: 20px;
+}
+
+#notebook-name {
+    width: 80%;
+    height: 30px;
+    font-size: 15px;
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* #Form Styles

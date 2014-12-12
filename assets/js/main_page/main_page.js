@@ -154,6 +154,13 @@ function showClippingOverlay() {
 }
 
 function hideClippingOverlay() {
+    var fileUploadForm = document.getElementById('file-form');
+    var clippingForm = document.getElementById('clipping-form');
+    clippingForm.style.display = 'none';
+    fileUploadForm.style.display = 'block';
+
+    clippingForm.reset();
+    fileUploadForm.reset();
     el = document.getElementById("add-clipping-overlay");
     el.style.visibility = "hidden";
 
