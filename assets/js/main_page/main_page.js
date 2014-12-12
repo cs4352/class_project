@@ -322,7 +322,7 @@ function loadClippingComments(cid) {
         response = JSON.parse(response);
         getMarkup = function(i, response, markupObj) {
             return $.ajax({
-                url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-comment_row.php?fname=' + response[i].FNAME + '&lname=' + response[i].LNAME + '&content=' + response[i].CONTENT
+                url: window.location.origin + JSI_IWP_DIR  + '/api/markup/markup-comment_row.php?fname=' + response[i].FNAME + '&lname=' + response[i].LNAME + '&content=' + response[i].CONTENT + '&id=' + response[i].ID
             }).done(function(markup) {
                 var key = response[i].ID;
                 markupObj[key] = markup;
@@ -680,6 +680,50 @@ function fileUploadFormHandler() {
         // Change the modal header.
         $('#add-clipping-overlay h2').text('Upload A Document');
     }
+}
+
+function deleteClipping(id) {
+    id = id.substring(id.indexOf('-') + 1);
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this clipping!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    }, function(){
+        swal("Deleted!", "Your clipping has been deleted.", "success");
+        $.ajax({
+            url: window.location.origin + JSI_IWP_DIR  + "/api/rest/clipping/delete_clipping.php?id=" + id + "&uid=" + JSIuid
+        }).done(function(response) {
+            $('.sidebar-list-link').remove();
+            loadClippings();
+        });
+    });
+}
+
+function deleteComment(id) {
+    id = id.substring(id.indexOf('-') + 1);
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this comment!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    }, function(){
+        swal("Deleted!", "Your comment has been deleted.", "success");
+        $.ajax({
+            url: window.location.origin + JSI_IWP_DIR  + "/api/rest/comments/delete_comment.php?id=" + id + "&uid=" + JSIuid
+        }).done(function(response) {
+            var selectedClipping = $('.selected');
+            var cid = selectedClipping.attr('id');
+            cid = cid.substring(cid.indexOf('-') + 1);
+            loadClippingComments(cid);
+        });
+    });
 }
 
 function nl2br(str, is_xhtml) {

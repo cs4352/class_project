@@ -40,6 +40,16 @@ function unShareClipping($origCid, $uid) {
   mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
 }
 
+function deleteSharedClipping($cid, $uid) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  // Save that the clipping is unshared.
+  $sql = sqlSetup();
+  $query = "DELETE FROM SHARED_CLIPPINGS
+            WHERE CID=$cid AND UID=$uid";
+  mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
+}
+
 /**
  * Checks if a clipping is shared with a user.
  *

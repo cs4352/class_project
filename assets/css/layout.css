@@ -310,6 +310,14 @@ textarea {
     visibility: hidden;
 }
 
+.clipping-delete {
+    position: relative;
+    top: 5px;
+    right: 5px;
+    color: black;
+    float: right;
+}
+
 .shared > .clipping-shared-icon {
     visibility: visible;
 }

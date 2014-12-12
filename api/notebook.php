@@ -55,3 +55,12 @@ SQL;
 
   return $notebook;
 }
+
+function notebookDeleteNotebook($id) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  $sql = sqlSetup();
+  $query = "DELETE FROM NOTEBOOKS
+        WHERE ID=$id";
+  mysqli_query($sql, $query);
+}
