@@ -67,7 +67,7 @@ $demo_user_notebooks[] = notebookCreateNotebook('Biology', $demo_users['demo']->
 $demo_user_notebooks[] = notebookCreateNotebook('Computer Science', $demo_users['demo']->id);
 
 // Give "demo" some clippings.
-$demo_user_clippings = array();git 
+$demo_user_clippings = array();
 
 $file = storeFile('demo_upload_biology.txt', 'txt', $demo_users['demo']->id);
 $clipping = saveClipping(
