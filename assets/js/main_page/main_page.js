@@ -41,7 +41,11 @@ function loadClippings() {
         var responseObject = JSON.parse(response);
         for (var i in responseObject) {
             var markup = JSInotebookRowTemplate.replace('%id', 'notebook-' + responseObject[i].ID).replace('%name', responseObject[i].NAME);
-            $('#sidebar-list').append(markup);
+            var $markup = $(markup);
+            if (responseObject[i].NAME == 'Default Notebook') {
+                $markup.addClass('hide');
+            }
+            $('#sidebar-list').append($markup);
 
             // Populate the notebooks list for the clipping creation form.
             if (responseObject[i].NAME == 'Default Notebook') {
@@ -106,7 +110,7 @@ function noClippingsPageLoad() {
     $('#new-user-area').show();
     $('#orig-file-link').hide();
 
-    $('.sidebar-list-cell-notebook').hide();
+    $('.hide').hide();
 }
 
 
