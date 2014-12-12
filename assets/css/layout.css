@@ -883,6 +883,15 @@ div #overlay-content {
     margin-top: 20px;
 }
 
+#notebook-name {
+    width: 80%;
+    height: 30px;
+    font-size: 15px;
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /* #Form Styles
 ================================================== */
 
