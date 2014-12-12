@@ -314,8 +314,16 @@ textarea {
     position: relative;
     top: 5px;
     right: 5px;
-    color: black;
+    color: #6B6B6B;
     float: right;
+    display: none;
+}
+
+.comment-row:hover > .clipping-delete {
+    display: block;
+}
+.sidebar-list-cell:hover > .clipping-delete {
+    display: block;
 }
 
 .shared > .clipping-shared-icon {
