@@ -58,3 +58,12 @@ function createComment($cid, $uid, $content) {
             ($cid, $uid, \"$content\")";
   mysqli_query($sql, $query) or die("A MySQL error has occurred.<br />Error: (" . mysqli_errno($sql) . ") " . mysqli_error($sql));
 }
+
+function commentDeleteComment($id) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  $sql = sqlSetup();
+  $query = "DELETE FROM COMMENTS
+        WHERE ID=$id";
+  mysqli_query($sql, $query);
+}

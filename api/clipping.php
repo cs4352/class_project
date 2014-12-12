@@ -195,3 +195,12 @@ SQL;
   }
   return $clippings;
 }
+
+function clippingDeleteClipping($id) {
+  require_once(dirname(__FILE__) . '/../helpers/database_helper.php');
+
+  $sql = sqlSetup();
+  $query = "DELETE FROM CLIPPINGS
+          WHERE ID=$id";
+  mysqli_query($sql, $query);
+}

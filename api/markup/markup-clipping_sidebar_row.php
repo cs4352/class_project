@@ -14,7 +14,8 @@ if (isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['name']) && isset($
 
   $markup = '
 <a id="' . $id . '" onclick="clickClipping(this.id)" class="sidebar-list-link">
-  <div  class="' . $cell_class . '">
+  <div class="' . $cell_class . '">
+      <div id="delete' . $id . '" class="clipping-delete" onclick="deleteClipping(this.id)" href="#">&#10006</div>
       <img class="clipping-shared-icon" src="http://' . $_SERVER['HTTP_HOST'] . $_IWP_DIR_ . '/assets/images/shared-note.png" />
     <div class="sidebar-list-cell-top-color" style="background-color: ' . $color . ';"></div>
     <div class="sidebar-list-cell-interior-padding">
