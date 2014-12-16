@@ -689,6 +689,20 @@ div #overlay-content {
     margin-bottom: 10px;
 }
 
+#clipping-form #your-file-heading {
+    margin-left: 10%;
+    width: 40%;
+    display: inline-block;
+    float: left;
+}
+
+#clipping-form #your-clipping-heading {
+    margin-right: 10%;
+    width: 40%;
+    display: inline-block;
+    float: right;
+}
+
 #clipping-form #uploaded-file-text {
     width: 39%;
     margin-left:10%;

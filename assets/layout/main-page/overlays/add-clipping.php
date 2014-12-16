@@ -20,6 +20,8 @@
             <input type="hidden" id="fid" value=""/>
             <p class="field-header"><strong>Highlight</strong>, then <strong>Drag</strong> the text you want to keep into the box on the right.</p><br />
             <div id="clipping-drag-container">
+              <h3 id="your-file-heading">Your File</h3>
+              <h3 id="your-clipping-heading">Your Clipping</h3>
               <textarea id="uploaded-file-text" name="uploaded-file-text" ondragstart="drag(event)" draggable="true" resizable spellcheck="false"></textarea>
               <textarea id="clipping-text" name="clipping-text" ondrop="drop(event)" ondragover="allowDrop(event)" onchange="addClippingIsReady()" onkeyup="addClippingIsReady()" required resizeable title="This is an error message" placeholder="Drag selected text here"></textarea><br />
             </div>
